@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Modal>
-        <LargeListBook books={books[0]} />
+        <LargeListBook book={books[0]} />
       </Modal>
       {/* <SplitScreen leftWidth={1} rightWidth={3}>
         <LeftSideComponent />
