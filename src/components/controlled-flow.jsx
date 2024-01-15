@@ -1,31 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 
-export const ControlledFlow = ({ children, onDone }) => {
-  const [data, setData] = useState({});
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
-
+export const ControlledFlow = ({ children, onDone, currentIndex, onNext }) => {
   const goNext = (dataFromStep) => {
-    const nextStepIndex = currentStepIndex + 1;
-
-    const newData = {
-      ...data,
-      ...dataFromStep,
-    };
-
-    console.log(newData);
-
-    if (nextStepIndex < children.length) {
-      setCurrentStepIndex(nextStepIndex);
-    } else {
-      onDone(newData);
-    }
-
-    setData(newData);
+    onNext(dataFromStep);
   };
 
-  const currentChild = React.Children.toArray(children)[currentStepIndex];
+  const currentChild = React.Children.toArray(children)[currentIndex];
 
   if (React.isValidElement(currentChild)) {
     return React.cloneElement(currentChild, { goNext });
   }
+
+  return currentChild;
 };
