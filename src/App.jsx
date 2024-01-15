@@ -1,42 +1,41 @@
+import axios from "axios";
 import "./App.css";
-import { LargeListBook } from "./components/list/books/LargeListItems";
-import { Modal } from "./components/modal/Modal";
-import { books } from "./data/books";
+import { DataSrouce } from "./components/data-source";
+import { DataSrouceWithRender } from "./components/data-source-with-render";
+import { UserInfo } from "./components/user-info";
 
 function App() {
+  const getDataFromServer = async (url) => {
+    const response = await axios.get(url);
+    return response.data;
+  };
+
+  const getDataFromLocalStorage = (key) => () => {
+    return localStorage.getItem(key);
+  };
+
+  const Message = ({ msg }) => {
+    return <h1>{msg}</h1>;
+  };
+
   return (
     <>
-      <Modal>
-        <LargeListBook book={books[0]} />
-      </Modal>
-      {/* <SplitScreen leftWidth={1} rightWidth={3}>
-        <LeftSideComponent />
-        <RightSideComponent />
-      </SplitScreen>
+      <DataSrouceWithRender
+        getData={() => getDataFromServer("http://localhost:9090/users/3")}
+        render={(resource) => <UserInfo user={resource} />}
+      ></DataSrouceWithRender>
+
       <hr />
-      <RegularList
-        items={authors}
-        sourceName={"author"}
-        ItemComponent={SmallListAuthor}
-      />
-      <hr />
-      <RegularList
-        items={authors}
-        sourceName={"author"}
-        ItemComponent={LargeListAuthor}
-      />
-      <hr />
-      <NumberedList
-        items={books}
-        sourceName={"book"}
-        ItemComponent={SmallListBook}
-      />
-      <hr />
-      <NumberedList
-        items={books}
-        sourceName={"book"}
-        ItemComponent={LargeListBook}
-      /> */}
+
+      <DataSrouce
+        getData={() => getDataFromLocalStorage("test")}
+        resourceName={"msg"}
+      >
+        <Message />
+      </DataSrouce>
+      {/* <UserLoader userId={1}>
+        <UserInfo />
+      </UserLoader> */}
     </>
   );
 }
