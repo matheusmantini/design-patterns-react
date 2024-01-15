@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./App.css";
-import { ControlledFlow } from "./components/controlled-flow";
 
 const StepOne = ({ goNext }) => {
   return (
@@ -49,31 +48,12 @@ function App() {
 
   return (
     <>
-<<<<<<< HEAD
-      <DataSrouceWithRender
-        getData={() => getDataFromServer("http://localhost:9090/users/3")}
-        render={(resource) => <UserInfo user={resource} />}
-      ></DataSrouceWithRender>
-
-      <hr />
-
-      <DataSrouce
-        getData={() => getDataFromLocalStorage("test")}
-        resourceName={"msg"}
-      >
-        <Message />
-      </DataSrouce>
-      {/* <UserLoader userId={1}>
-        <UserInfo />
-      </UserLoader> */}
-=======
       <ControlledFlow onNext={goNext} currentIndex={currentStepIndex}>
         <StepOne />
         <StepTwo />
         {data.age > 25 && <StepThree />}
         <StepFour />
       </ControlledFlow>
->>>>>>> controlled-uncontrolled-components
     </>
   );
 }
