@@ -1,6 +1,7 @@
 import axios from "axios";
 import "./App.css";
 import { DataSrouce } from "./components/data-source";
+import { DataSrouceWithRender } from "./components/data-source-with-render";
 import { UserInfo } from "./components/user-info";
 
 function App() {
@@ -9,13 +10,28 @@ function App() {
     return response.data;
   };
 
+  const getDataFromLocalStorage = (key) => () => {
+    return localStorage.getItem(key);
+  };
+
+  const Message = ({ msg }) => {
+    return <h1>{msg}</h1>;
+  };
+
   return (
     <>
-      <DataSrouce
+      <DataSrouceWithRender
         getData={() => getDataFromServer("http://localhost:9090/users/3")}
-        resourceName={"user"}
+        render={(resource) => <UserInfo user={resource} />}
+      ></DataSrouceWithRender>
+
+      <hr />
+
+      <DataSrouce
+        getData={() => getDataFromLocalStorage("test")}
+        resourceName={"msg"}
       >
-        <UserInfo />
+        <Message />
       </DataSrouce>
       {/* <UserLoader userId={1}>
         <UserInfo />
