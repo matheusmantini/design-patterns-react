@@ -1,7 +1,15 @@
-import { useResource } from "./resource.hook";
+import axios from "axios";
+import { useDataSource } from "./data-source.hook";
+
+const fetchFromServer = (resourceUrl) => async () => {
+  const response = await axios.get(resourceUrl);
+  return response.data;
+};
 
 export const UserInfo = ({ userId }) => {
-  const user = useResource(`http://localhost:9090/users/${userId}`);
+  const user = useDataSource(
+    fetchFromServer(`http://localhost:9090/users/${userId}`)
+  );
   const { name, age, country, books } = user || {};
   return user ? (
     <>
