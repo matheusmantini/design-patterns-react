@@ -1,9 +1,11 @@
 import "./App.css";
+import { GreenSmallButton, RedButton } from "./components/composition";
 
 function App() {
   return (
     <>
-      <h1>Start Here!</h1>
+      <RedButton text={"I'm red!"} />
+      <GreenSmallButton text={"I'm a small green button!"} />
     </>
   );
 }
