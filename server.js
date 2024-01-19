@@ -1,8 +1,10 @@
-const express = require("express");
+import cors from "cors";
+import express, { json } from "express";
 
 const app = express();
 
-app.use(express.json());
+app.use(json());
+app.use(cors());
 
 let currentUser = {
   id: "1",

@@ -1,13 +1,10 @@
 import "./App.css";
-import { logProps } from "./components/log-props";
-import { UserInfo } from "./components/user-info";
-
-const UserInfoWrapper = logProps(UserInfo);
+import { UserInfoForm } from "./components/user-form";
 
 function App() {
   return (
     <>
-      <UserInfoWrapper test={"test"} b={"I'am a B"} c={"I'm a C"} />
+      <UserInfoForm />
     </>
   );
 }
