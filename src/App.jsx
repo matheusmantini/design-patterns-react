@@ -1,9 +1,13 @@
+import mitt from "mitt";
 import "./App.css";
+import { ParentComponent } from "./components/parent";
+
+export const emitter = mitt();
 
 function App() {
   return (
     <>
-      <h1>Start Here!</h1>
+      <ParentComponent />
     </>
   );
 }
